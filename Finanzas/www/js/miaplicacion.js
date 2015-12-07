@@ -21,13 +21,21 @@ document.addEventListener("deviceready", function(){
         event.preventDefault(); // cancel default behavior
         var username = $("#username").val();
         var password = $("#password").val();
+        db.transaction(function(tx){
+                 		tx.executeSql('DROP TABLE IF EXISTS sesion');
+                 	tx.executeSql("CREATE TABLE IF NOT EXISTS sesion (usuario)");
+                 	tx.executeSql("INSERT INTO sesion (usuario) VALUES (?)", [username],function(tx,res){
+            alert("sesion agregado");    
+        });
+                 	});
+                 	
+                 	
         db.transaction(function(tx) {
            
             tx.executeSql('SELECT * FROM USUARIO WHERE usuario=? AND contrasena=?', [username, password], function(tx, results) {
                  if (results.rows.length > 0) {
-                 	tx.executeSql('DROP TABLE IF EXISTS sesion');
-                 	tx.executeSql("CREATE TABLE IF NOT EXISTS sesion (usuario)");
-                 	tx.executeSql("INSERT INTO sesion (usuario) VALUES (?)", [username]);
+                 	
+                 	
                     window.location = "balance.html";
                  } else {
                     alert("Invalid username or password");
@@ -82,13 +90,13 @@ function add(){
 }
 
 function obtenerSesion(){
+
 	db.transaction(function(tx) {
            
-            tx.executeSql('SELECT * FROM sesion' , [], function(tx, results) {
-                 if (results.rows.length > 0) {
-                 	var row = results.rows.item(0);
-                 	document.getElementById("sesion").innerHTML=row[usuario];
-                 } 
+            tx.executeSql('SELECT * FROM sesion' , [ ], function(tx, results) {
+                   	alert(results.rows.item(0).usuario);
+                 	document.getElementById("sesion").innerHTML=results.rows.item(0).usuario;
+                 
             }, errorCB);
         });
 }
