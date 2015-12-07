@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<script  src="js/jquery-2.1.4.min.js" ></script>
+		<script  src="js/jquery.mobile-1.4.5.js" ></script>
+        <script type="text/javascript" src="cordova.js"></script>
+		<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+			<script type="text/javascript" src="js/miaplicacion.js"></script>
+	
+
+	</head>
+
+	<body>
+
+		<section data-role="page" id="registrarse" data-theme="a" >
+			<header data-role="header">
+				<h2>Registro</h2>
+			</header>
+			<div data-role="content">
+				<form id="formLogin">
+					<div data-role="fieldcontain">
+						<fieldset>
+							<label for="nombre"><strong>Nombre completo:</strong></label>
+							<input name="nombre" id="nombre" placeholder="Escribir nombre" type="text" required="">
+
+							<label for="usuario"><strong>Usuario:</strong></label>
+							<input name="usuario" id="usuario" placeholder="Escribir usuario" value="" type="text" required="">
+
+							<label for="contraseña"><strong>Contraseña:</strong></label>
+							<input name="contraseña" id="contrasena" value="" autocomplete="off" placeholder="Escribir contraseña" type="password" required="">
+							
+							<label for="contraseña"><strong>Balance inicial:</strong></label>
+							<input name="balance" id="balance" value="" autocomplete="off" placeholder="Escribir balance" type="number" required="">
+
+							
+
+						</fieldset>
+					</div>
+				</form>
+				
+				<button onclick="add()"> Registrar</button>
+				
+			</div>
+			<footer data-role="footer" data-position="fixed" >
+
+				<p style="font-size:72%;text-align:center">© Elías Canché, Carlos Arjaujo Inc.  All rights reserved.</p>
+					
+			
+			</footer>
+		</section>
+	</body>
+</html>
