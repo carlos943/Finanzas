@@ -11,6 +11,7 @@ document.addEventListener("deviceready", function(){
         //
         tx.executeSql("CREATE TABLE IF NOT EXISTS balance (usuario text , cantidad )");
         tx.executeSql("CREATE TABLE IF NOT EXISTS ingreso (usuario text , cantidad , descripcion text )");
+        tx.executeSql("CREATE TABLE IF NOT EXISTS egreso (usuario text , cantidad , descripcion text )");
         
     }, function(err){
         alert("An error occurred while initializing the app");
@@ -127,15 +128,11 @@ function registrarIngreso () {
 	db.transaction(function(tx) {
            
             tx.executeSql('SELECT * FROM balance' , [], function(tx, results) {
-            	for (var i=0; i < results.rows.length; i++) {
-            		alert(results.rows.item(i).cantidad);
-            	}
+            	//for (var i=0; i < ; i++) {
+            		alert(results.rows.item(results.rows.length-1).cantidad);
+            	var anterior=results.rows.item(results.rows.length-1).cantidad;
             	
-                   	//cantidadAnterior=results.rows.item(0).cantidad;
-            }, errorCB);
-        });
-	
-	cantidadNueva=cantidadAnterior+cantidad;
+            	cantidadNueva=parseInt(anterior)+parseInt(cantidad);
 	
 	db.transaction(function(tx) {
         tx.executeSql("INSERT INTO balance (usuario, cantidad) VALUES (?,?)", [sesion, cantidadNueva], function(tx,res){
@@ -145,6 +142,57 @@ function registrarIngreso () {
     }, function(err){
         alert("An error occured while saving the note");
     });
+            	
+                   	//cantidadAnterior=results.rows.item(0).cantidad;
+            }, errorCB);
+        });
+	
+	
+	
+	
+}
+
+function registrarEgreso () {
+	obtenerSesion();
+	var cantidadAnterior="";
+	var cantidadNueva=null;
+  var descripcion = document.getElementById("descripcion").value;
+	var cantidad = document.getElementById("cantidad").value;
+	var fecha=new Date();
+	//var cadenafecha=fecha.getDate()+"/"+fecha.getMonth()+1;
+	var cadenafecha="prueba";
+	db.transaction(function(tx) {
+        tx.executeSql("INSERT INTO egreso (usuario, cantidad, descripcion) VALUES (?,?,?)", [sesion, cantidad, descripcion], function(tx,res){
+            alert("ingreso agregado");    
+        });
+    }, function(err){
+        alert("An error occured while saving the note");
+    });
+	
+	
+	db.transaction(function(tx) {
+           
+            tx.executeSql('SELECT * FROM balance' , [], function(tx, results) {
+            	//for (var i=0; i < ; i++) {
+            		alert(results.rows.item(results.rows.length-1).cantidad);
+            	var anterior=results.rows.item(results.rows.length-1).cantidad;
+            	
+            	cantidadNueva=parseInt(anterior)-parseInt(cantidad);
+	
+	db.transaction(function(tx) {
+        tx.executeSql("INSERT INTO balance (usuario, cantidad) VALUES (?,?)", [sesion, cantidadNueva], function(tx,res){
+           
+            alert("ahora tienes "+ cantidadNueva);   
+        });
+    }, function(err){
+        alert("An error occured while saving the note");
+    });
+            	
+                   	//cantidadAnterior=results.rows.item(0).cantidad;
+            }, errorCB);
+        });
+	
+	
 	
 	
 }
