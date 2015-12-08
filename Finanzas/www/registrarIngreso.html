@@ -4,6 +4,8 @@
 	<script  src="js/jquery-2.1.4.min.js" ></script>
 	<script  src="js/jquery.mobile-1.4.5.js" ></script>
 	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+	<script type="text/javascript" src="js/miaplicacion.js"></script>
+		  <script type="text/javascript" src="cordova.js"></script>
 
 	<script src="js/menu.js"></script>
 	<link rel="stylesheet" href="css/menu.css" />
@@ -72,7 +74,7 @@
 
 		<!-- DIV de contenido de la página -->
 		<div data-role="content">
-			<form id="formIngreso" action="" method="post">
+			<form id="formIngreso" >
 				<div data-role="fieldcontain">
 
 					<!-- campos de ingreso de texto -->
@@ -80,7 +82,7 @@
 						<label for="descripcion"><strong>Descripción:</strong></label>
 						<textarea name="descripcion" id="descripcion" placeholder="Descripción..."></textarea>
 						<label for="cantidad"><strong>Cantidad:</strong></label>
-						<input name="cantidad" id="cantidad" autocomplete="off" placeholder="Cantidad" required>
+						<input type="number" name="cantidad" id="cantidad" autocomplete="off" placeholder="Cantidad" required>
 					</fieldset>
 
 					<!------////FOTO/////--->
@@ -108,11 +110,11 @@
 					</div>
 
 					<!------////SUBMIT/////--->
-					<input type="submit" value="Registrar"/>
+					
 
 				</div>
 			</form>
-
+			<input type="button" value="Registrar" onclick="registrarIngreso()"/>
 		</div>
 
 		<!-- MENU IZQUIERDO-->

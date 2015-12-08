@@ -6,7 +6,11 @@ document.addEventListener("deviceready", function(){
     //alert("si pasa");
     db.transaction(function(tx) {
         tx.executeSql("CREATE TABLE IF NOT EXISTS usuario (nombre text primary key, usuario text,contrasena text)");
-        tx.executeSql("CREATE TABLE IF NOT EXISTS balance (usuario text , cantidad integer)");
+        //QUITAR ESTA LINEA
+        //tx.executeSql('DROP TABLE IF EXISTS balance');
+        //
+        tx.executeSql("CREATE TABLE IF NOT EXISTS balance (usuario text , cantidad )");
+        tx.executeSql("CREATE TABLE IF NOT EXISTS ingreso (usuario text , cantidad , descripcion text )");
         
     }, function(err){
         alert("An error occurred while initializing the app");
@@ -63,13 +67,14 @@ document.addEventListener("deviceready", function(){
 function add(){
     // var name = document.getElementById("name").value;
     // var text = document.getElementById("note-text").value;
-    alert("si pasa");
+
 	var nombre = document.getElementById("nombre").value;
 	var usuario = document.getElementById("usuario").value;
 	var contrasena = document.getElementById("contrasena").value;
 	var balance = document.getElementById("balance").value;
-	
-	
+	var fecha=new Date();
+	//var cadenafecha=fecha.getDate()+"/"+fecha.getMonth()+1;
+	var cadenafecha="cadena de prueba";
 
     db.transaction(function(tx) {
         tx.executeSql("INSERT INTO usuario (nombre, usuario, contrasena) VALUES (?,?,?)", [nombre, usuario, contrasena], function(tx,res){
@@ -94,10 +99,52 @@ function obtenerSesion(){
 	db.transaction(function(tx) {
            
             tx.executeSql('SELECT * FROM sesion' , [ ], function(tx, results) {
-                   	alert(results.rows.item(0).usuario);
-                 	document.getElementById("sesion").innerHTML=results.rows.item(0).usuario;
+                   	sesion=results.rows.item(0).usuario;
+                 	document.getElementById("sesion").innerHTML=sesion;
                  
             }, errorCB);
         });
 }
 
+function registrarIngreso () {
+	obtenerSesion();
+	var cantidadAnterior="";
+	var cantidadNueva=null;
+  var descripcion = document.getElementById("descripcion").value;
+	var cantidad = document.getElementById("cantidad").value;
+	var fecha=new Date();
+	//var cadenafecha=fecha.getDate()+"/"+fecha.getMonth()+1;
+	var cadenafecha="prueba";
+	db.transaction(function(tx) {
+        tx.executeSql("INSERT INTO ingreso (usuario, cantidad, descripcion) VALUES (?,?,?)", [sesion, cantidad, descripcion], function(tx,res){
+            alert("ingreso agregado");    
+        });
+    }, function(err){
+        alert("An error occured while saving the note");
+    });
+	
+	
+	db.transaction(function(tx) {
+           
+            tx.executeSql('SELECT * FROM balance' , [], function(tx, results) {
+            	for (var i=0; i < results.rows.length; i++) {
+            		alert(results.rows.item(i).cantidad);
+            	}
+            	
+                   	//cantidadAnterior=results.rows.item(0).cantidad;
+            }, errorCB);
+        });
+	
+	cantidadNueva=cantidadAnterior+cantidad;
+	
+	db.transaction(function(tx) {
+        tx.executeSql("INSERT INTO balance (usuario, cantidad) VALUES (?,?)", [sesion, cantidadNueva], function(tx,res){
+           
+            alert("ahora tienes "+ cantidadNueva);   
+        });
+    }, function(err){
+        alert("An error occured while saving the note");
+    });
+	
+	
+}
