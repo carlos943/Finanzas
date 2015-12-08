@@ -1,0 +1,5 @@
+//calendario
+$(function(){
+    $("#calendario").datepicker();  
+});
+    
