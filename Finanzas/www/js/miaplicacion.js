@@ -192,7 +192,23 @@ function registrarEgreso () {
             }, errorCB);
         });
 	
-	
-	
-	
 }
+
+
+function cargarBalance(){
+	
+	
+	var arr=[];
+	db.transaction(function(tx) {
+        tx.executeSql('SELECT * FROM balance where usuario=?' , [sesion], function(tx,res){
+                for (var i=0; i < res.rows.length ; i++) {
+                	arr.push(res.rows.item(i).cantidad);
+                }
+                alert(arr);
+                /// AQUI VA LA GRAFICA
+        });
+    }, function(err){
+        alert("An error occured while saving the note");
+    });
+}
+
