@@ -6,10 +6,20 @@
 	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
 	<script type="text/javascript" src="js/miaplicacion.js"></script>
 		  <script type="text/javascript" src="cordova.js"></script>
+		  <script type="text/javascript" src="js/mapa.js"></script>
+		  <script type="text/javascript" src="js/fotos.js"></script>
+		  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 
 	<script src="js/menu.js"></script>
 	<link rel="stylesheet" href="css/menu.css" />
-        <script src="js/opc.js">/script>
+        <script src="js/opc.js"></script>
+        
+        <style type="text/css">
+			html{height: 100%}
+			body{height: 100%; margin:0; padding: 0}
+			
+		</style>
+        
 </head>
 
 <body>
@@ -26,7 +36,7 @@
 
 		<!-- DIV de contenido de la página -->
 		<div data-role="content">
-			<form id="formIngreso" >
+			
 				<div data-role="fieldcontain">
 
 					<!-- campos de ingreso de texto -->
@@ -46,7 +56,10 @@
 					</select>
 					<!-- div para la foto -->
 					<div id="fotoTomada">
-						<iframe></iframe>
+						
+							<input type="button" onclick="getPhoto()" value="tomar foto" />
+							<img id="imagen" width="200px" height="200px" />
+						
 					</div>
 
 					<!------////UBICACION/////--->
@@ -58,14 +71,18 @@
 					</select>
 					<!-- div para la unicacion -->
 					<div id="ubicacion">
-						<iframe></iframe>
+						
 					</div>
 
 					<!------////SUBMIT/////--->
 					
 
 				</div>
-			</form>
+			
+			<button onclick="mapa()">locacion</button>
+			<div id="geolocation"></div>
+					<div id="map_fmat" style="width: 60%; height: 50%">
+			
 			<input type="button" value="Registrar" onclick="registrarIngreso()"/>
 		</div>
 

@@ -17,8 +17,51 @@ document.addEventListener("deviceready", function(){
     }, function(err){
         alert("An error occurred while initializing the app");
     });
+    
+    
+    
+    
 }, false);
 
+var watchID = null;
+
+			document.addEventListener("deviceready", iniciaAcelerometro, false);
+
+			function iniciaAcelerometro() {
+				startWatch();
+			}
+
+			function startWatch() {
+				var options = {
+					frequency : 500
+				};
+				watchID = navigator.accelerometer.watchAcceleration(exitoAccel, errorAccel, options);
+			}
+
+			function stopWatch() {
+				if (watchID) {
+					navigator.accelerometer.clearWatch(watchID);
+					watchID = null;
+				}
+			}
+
+			
+
+			function exitoAccel(acceleration) {
+
+				
+
+				var valor1 = acceleration.x;
+				
+				if(valor1>6){
+					window.history.back();
+				}
+
+				}
+
+			function errorAccel() {
+				alert('onError!');
+			}
     // Populate the database 
     //
  
@@ -212,14 +255,14 @@ function cargarBalance(){
                 for (i = 0; i < arr.length; i++) {
                     matriz[i] = new Array(2);
                     for (j = 0; j < 1; j++) {
-                        matriz[i][j]="";
+                        matriz[i][j]=i+1;
                         matriz[i][j+1]=arr[i];
                         
                     }
                 }
-                
+                alert(matriz);
                 $.jqplot('chartdiv', [matriz],{
-                title: 'Balance del d�a'
+                title: 'Balance del dia'
                 });
         });
     }, function(err){
@@ -242,5 +285,48 @@ function agregarRecordatorio () {
     });
   
 }
+
+var watchID = null;
+
+			document.addEventListener("deviceready", iniciaAcelerometro, false);
+
+			function iniciaAcelerometro() {
+				startWatch();
+			}
+
+			function startWatch() {
+				var options = {
+					frequency : 500
+				};
+				watchID = navigator.accelerometer.watchAcceleration(exitoAccel, errorAccel, options);
+			}
+
+			function stopWatch() {
+				if (watchID) {
+					navigator.accelerometer.clearWatch(watchID);
+					watchID = null;
+				}
+			}
+
+			
+
+			function exitoAccel(acceleration) {
+
+				
+
+				var valor1 = acceleration.x;
+				
+				if(valor1>6){
+					window.history.back();
+				}
+
+				}
+
+			function errorAccel() {
+				alert('onError!');
+			}
+
+			
+	
 
 
