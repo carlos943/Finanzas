@@ -7,54 +7,8 @@
 
 	<script src="js/menu.js"></script>
 	<link rel="stylesheet" href="css/menu.css" />
-	<script type="text/javascript">
-		function tomarfoto() {
-			var switchFoto = $("#tomarFoto");
-			var cuadroFoto = $("#fotoTomada");
-			if (switchFoto.val() == "si") {
-				cuadroFoto.css({
-					"display" : "block"
-				});
-			} else {
-				cuadroFoto.css({
-					"display" : "none"
-				});
-			}
-		}
-
-		function guardarubicacion() {
-			var switchUbicacion = $("#guardarUbicacion");
-			var cuadroUbicacion = $("#ubicacion");
-			if (switchUbicacion.val() == "si") {
-				cuadroUbicacion.css({
-					"display" : "block"
-				});
-			} else {
-				cuadroUbicacion.css({
-					"display" : "none"
-				});
-			}
-		}
-		
-		$(function() {
-
-			$("#a2").css({
-				"background-color" : "#2AD",
-				"border-color" : "#2AD",
-				"color" : "#FFF",
-				"text-shadow" : "0px 1px 0px #08B",
-				"cursor" : "pointer"
-			});
-
-			$("#a2").css({
-				"unselectable" : "on"
-			});
-			
-			$("#fotoTomada").css({"display":"none"});
-			$("#ubicacion").css({"display":"none"});
-
-		});
-	</script>
+        
+        <script src="js/opc.js"></script>
 </head>
 
 <body>
@@ -120,19 +74,19 @@
 			<a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Cerar</a>
 			<ul data-role="listview" data-inset="false">
 				<li>
-					<a id="a1" class="ui-btn" href="registrarIngreso.html" rel="external" >Registrar ingreso</a>
+					<a class="ui-btn" href="registrarIngreso.html" rel="external" >Registrar ingreso</a>
 				</li>
 				<li>
 					<a id="a2" class="ui-btn" href="registrarEgreso.html" >Registrar egreso</a>
 				</li>
 				<li>
-					<a id="a3" class="ui-btn" href="recordatorio.html" rel="external" >Agregar recordatorio</a>
+					<a  class="ui-btn" href="recordatorio.html" rel="external" >Agregar recordatorio</a>
 				</li>
 				<li>
-					<a id="a4" class="ui-btn" href="balance.html" rel="external"  >Balance</a>
+					<a  class="ui-btn" href="balance.html" rel="external"  >Balance</a>
 				</li>
 				<li>
-					<a id="a5" class="ui-btn" href="#" rel="external" >Exportar</a>
+					<a  class="ui-btn" href="#" rel="external" >Exportar</a>
 				</li>
 
 			</ul>

@@ -1,88 +1,75 @@
 <!DOCTYPE html>
 <head>
-	<meta charset="UTF-8"/>
-	<script  src="js/jquery-2.1.4.min.js" ></script>
-	<script  src="js/jquery.mobile-1.4.5.js" ></script>
-	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+    <meta charset="UTF-8"/>
+    <script  src="js/jquery-2.1.4.min.js" ></script>
+    <script  src="js/jquery.mobile-1.4.5.js" ></script>
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
 
-	<script src="js/menu.js"></script>
-	<link rel="stylesheet" href="css/menu.css" />
-	  <script type="text/javascript" src="cordova.js"></script>
-	<script type="text/javascript" src="js/miaplicacion.js"></script>
-	<script type="text/javascript">
-	
-		
-		
-		$(function() {
-
-			$("#a4").css({
-				"background-color" : "#2AD",
-				"border-color" : "#2AD",
-				"color" : "#FFF",
-				"text-shadow" : "0px 1px 0px #08B",
-				"cursor" : "pointer"
-			});
-
-			$("#a4").css({
-				"unselectable" : "on"
-			});
-
-		});
-	</script>
+    <script src="js/menu.js"></script>
+    <link rel="stylesheet" href="css/menu.css" />
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/miaplicacion.js"></script>
+    <script src="js/opc.js"></script>
+    
+    <script src="js/grafica.js"></script>
+    <script src="js/excanvas.js"></script>
+    <script src="js/jquery.jqplot.js"></script>
+    <link rel="stylesheet" href="css/jquery.jqplot.css" />
 </head>
 
 <body>
 
-	<section data-role="page" id="balance" data-theme="a" data-position="fixed" data-url="balance">
+    <section data-role="page" id="balance" data-theme="a" data-position="fixed" data-url="balance">
 
-		<!-- HEADER de la página -->
-		<div data-role="header" data-position="fixed" data-theme="b">
-			<h1>Balance</h1>
-			<!-- icono de panel izquierdo -->
-			<a href="#panelIzquierdo" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
+        <!-- HEADER de la página -->
+        <div data-role="header" data-position="fixed" data-theme="b">
+            <h1>Balance</h1>
+            <!-- icono de panel izquierdo -->
+            <a href="#panelIzquierdo" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
 
-		</div>
+        </div>
 
-		<!-- DIV de contenido de la página -->
-		<div data-role="content">
+        <!-- DIV de contenido de la página -->
+        <div  align="center" data-role="content">
+            <p></p>
+            <div id="chartdiv" style="height:80%;width:70%;"></div>
+        </div>
 
-		</div>
+        <!-- MENU IZQUIERDO-->
+        <div data-role="panel" id="panelIzquierdo" data-theme="b" data-display="overlay">
+            <h2> Menú </h2>
+            <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Cerar</a>
+            <ul data-role="listview" data-inset="false">
 
-		<!-- MENU IZQUIERDO-->
-		<div data-role="panel" id="panelIzquierdo" data-theme="b" data-display="overlay">
-			<h2> Menú </h2>
-			<a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Cerar</a>
-			<ul data-role="listview" data-inset="false">
-				
-				<li>
-					<a id="a1" class="ui-btn" href="registrarIngreso.html" rel="external" >Registrar ingreso</a>
-				</li>
-				<li>
-					<a id="a2" class="ui-btn" href="registrarEgreso.html" rel="external">Registrar egreso</a>
-				</li>
-				<li>
-					<a id="a3" class="ui-btn" href="recordatorio.html" rel="external" >Agregar recordatorio</a>
-				</li>
-				<li>
-					<a id="a4" class="ui-btn" href="balance.html" >Balance</a>
-				</li>
-				<li>
-					<a id="a5" class="ui-btn" href="#" rel="external" >Exportar</a>
-				</li>
+                <li>
+                    <a  class="ui-btn" href="registrarIngreso.html" rel="external" >Registrar ingreso</a>
+                </li>
+                <li>
+                    <a  class="ui-btn" href="registrarEgreso.html" rel="external">Registrar egreso</a>
+                </li>
+                <li>
+                    <a  class="ui-btn" href="recordatorio.html" rel="external" >Agregar recordatorio</a>
+                </li>
+                <li>
+                    <a id="a4" class="ui-btn" href="balance.html" >Balance</a>
+                </li>
+                <li>
+                    <a  class="ui-btn" href="#" rel="external" >Exportar</a>
+                </li>
 
-			</ul>
-		</div>
-		<button onclick="obtenerSesion()">Cargar</button>
-		<div id="sesion"></div>
+            </ul>
+        </div>
+        <button onclick="obtenerSesion()">Cargar</button>
+        <div id="sesion"></div>
 
-		<!-- FOOTER de la pagina -->
-		<footer data-role="footer" data-position="fixed" >
+        <!-- FOOTER de la pagina -->
+        <footer data-role="footer" data-position="fixed" >
 
-			<p style="font-size:72%;text-align:center">
-				© Elías Canché, Carlos Arjaujo Inc.  All rights reserved.
-			</p>
+            <p style="font-size:72%;text-align:center">
+                © Elías Canché, Carlos Arjaujo Inc.  All rights reserved.
+            </p>
 
-		</footer>
-	</section>
+        </footer>
+    </section>
 </body>
 </html>
