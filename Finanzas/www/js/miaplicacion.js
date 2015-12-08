@@ -12,6 +12,7 @@ document.addEventListener("deviceready", function(){
         tx.executeSql("CREATE TABLE IF NOT EXISTS balance (usuario text , cantidad )");
         tx.executeSql("CREATE TABLE IF NOT EXISTS ingreso (usuario text , cantidad , descripcion text )");
         tx.executeSql("CREATE TABLE IF NOT EXISTS egreso (usuario text , cantidad , descripcion text )");
+         tx.executeSql("CREATE TABLE IF NOT EXISTS recordatorio (usuario, fecha, descripcion )");
         
     }, function(err){
         alert("An error occurred while initializing the app");
@@ -211,4 +212,21 @@ function cargarBalance(){
         alert("An error occured while saving the note");
     });
 }
+
+function agregarRecordatorio () {
+  obtenerSesion();
+  var descripcion = document.getElementById("descripcion").value;
+	var fecha = document.getElementById("fecha").value;
+  
+  db.transaction(function(tx) {
+        tx.executeSql("INSERT INTO recordatorio (usuario, fecha, descripcion) VALUES (?,?,?)", [sesion, fecha, descripcion], function(tx,res){
+           
+            alert("recordatorio agregado");   
+        });
+    }, function(err){
+        alert("An error occured");
+    });
+  
+}
+
 

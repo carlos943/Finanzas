@@ -9,55 +9,7 @@
 
 	<script src="js/menu.js"></script>
 	<link rel="stylesheet" href="css/menu.css" />
-	<script type="text/javascript">
-		function tomarfoto() {
-			var switchFoto = $("#tomarFoto");
-			var cuadroFoto = $("#fotoTomada");
-			if (switchFoto.val() == "si") {
-				cuadroFoto.css({
-					"display" : "block"
-				});
-			} else {
-				cuadroFoto.css({
-					"display" : "none"
-				});
-			}
-		}
-
-		function guardarubicacion() {
-			var switchUbicacion = $("#guardarUbicacion");
-			var cuadroUbicacion = $("#ubicacion");
-			if (switchUbicacion.val() == "si") {
-				cuadroUbicacion.css({
-					"display" : "block"
-				});
-			} else {
-				cuadroUbicacion.css({
-					"display" : "none"
-				});
-			}
-		}
-
-		$(function() {
-
-			$("#a1").css({
-				"background-color" : "#2AD",
-				"border-color" : "#2AD",
-				"color" : "#FFF",
-				"text-shadow" : "0px 1px 0px #08B",
-				"cursor" : "pointer"
-			});
-
-			$("#a1").css({
-				"unselectable" : "on"
-			});
-			
-				$("#fotoTomada").css({"display":"none"});
-			$("#ubicacion").css({"display":"none"});
-
-		});
-
-	</script>
+        <script src="js/opc.js">/script>
 </head>
 
 <body>
@@ -126,16 +78,16 @@
 					<a id="a1" class="ui-btn" href="registrarIngreso.html" >Registrar ingreso</a>
 				</li>
 				<li>
-					<a id="a2" class="ui-btn" href="registrarEgreso.html" rel="external" >Registrar egreso</a>
+					<a class="ui-btn" href="registrarEgreso.html" rel="external" >Registrar egreso</a>
 				</li>
 				<li>
-					<a id="a3" class="ui-btn" href="recordatorio.html" rel="external" >Agregar recordatorio</a>
+					<a class="ui-btn" href="recordatorio.html" rel="external" >Agregar recordatorio</a>
 				</li>
 				<li>
-					<a id="a4" class="ui-btn" href="balance.html" rel="external"  >Balance</a>
+					<a class="ui-btn" href="balance.html" rel="external"  >Balance</a>
 				</li>
 				<li>
-					<a id="a5" class="ui-btn" href="#" rel="external">Exportar</a>
+					<a class="ui-btn" href="#" rel="external">Exportar</a>
 				</li>
 
 			</ul>
