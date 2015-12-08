@@ -200,6 +200,7 @@ function cargarBalance(){
 	
 	
 	var arr=[];
+        var matriz=[];
 	db.transaction(function(tx) {
         tx.executeSql('SELECT * FROM balance where usuario=?' , [sesion], function(tx,res){
                 for (var i=0; i < res.rows.length ; i++) {
@@ -207,6 +208,19 @@ function cargarBalance(){
                 }
                 alert(arr);
                 /// AQUI VA LA GRAFICA
+                matriz = new Array(arr.length);
+                for (i = 0; i < arr.length; i++) {
+                    matriz[i] = new Array(2);
+                    for (j = 0; j < 1; j++) {
+                        matriz[i][j]="";
+                        matriz[i][j+1]=arr[i];
+                        
+                    }
+                }
+                
+                $.jqplot('chartdiv', [matriz],{
+                title: 'Balance del d�a'
+                });
         });
     }, function(err){
         alert("An error occured while saving the note");
