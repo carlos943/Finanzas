@@ -74,7 +74,7 @@ function onVolumeUp() {
 
     $("#chartdiv").remove();
 
-    $("#prueba").append(" <div id='chartdiv' style='height:400px;width:300px; '></div>");
+    $("#prueba").append(" <div id='chartdiv' style='height:400px;width:300px; overflow: scroll;'></div>");
 
     $("#chartdiv").css("width", (parseInt(ultimoAncho) + 20) + "px");
     $("#chartdiv").css("height", (parseInt(ultimoLargo) + 20) + "px");
@@ -91,7 +91,7 @@ function onVolumeDown() {
 
     $("#chartdiv").remove();
 
-    $("#prueba").append(" <div id='chartdiv' style='height:400px;width:300px; '></div>");
+    $("#prueba").append(" <div id='chartdiv' style='height:400px;width:300px; overflow: scroll;'></div>");
 
     $("#chartdiv").css("width", (parseInt(ultimoAncho) - 20) + "px");
     $("#chartdiv").css("height", (parseInt(ultimoLargo) - 20) + "px");
@@ -286,7 +286,7 @@ function cargarBalance() {
             for (var i = 0; i < res.rows.length; i++) {
                 arr.push(res.rows.item(i).cantidad);
             }
-            alert(arr);
+            //lert(arr);
             /// AQUI VA LA GRAFICA
             matriz = new Array(arr.length);
             for (i = 0; i < arr.length; i++) {
@@ -297,7 +297,7 @@ function cargarBalance() {
 
                 }
             }
-            alert(matriz);
+            //alert(matriz);
 
             $.jqplot('chartdiv', [matriz], {
                 title: 'Balance del dia'
