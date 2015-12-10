@@ -70,7 +70,7 @@
     
 
     function convertArrayOfObjectsToCSV(args) {
-        crearArregloCSV(balanceActual,arregloIngreso,arregloEgreso);
+        //crearArregloCSV(balanceActual,arregloIngreso,arregloEgreso);
         var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
         data = args.data || null;
@@ -98,7 +98,7 @@
             result += lineDelimiter;
         });
 
-        contenido= result;
+        return result;
     }
 
     window.downloadCSV = function(args) {
