@@ -1,25 +1,33 @@
 <!DOCTYPE html>
 <head>
 	<meta charset="UTF-8"/>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 	<script  src="js/jquery-2.1.4.min.js" ></script>
 	<script  src="js/jquery.mobile-1.4.5.js" ></script>
 	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
 	<script type="text/javascript" src="js/miaplicacion.js"></script>
-		  <script type="text/javascript" src="cordova.js"></script>
-		  <script type="text/javascript" src="js/mapa.js"></script>
-		  <script type="text/javascript" src="js/fotos.js"></script>
-		  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+
+	
+	<script type="text/javascript" src="cordova.js"></script>
+	<script type="text/javascript" src="js/mapa.js"></script>
+	<script type="text/javascript" src="js/fotos.js"></script>
 
 	<script src="js/menu.js"></script>
 	<link rel="stylesheet" href="css/menu.css" />
-        <script src="js/opc.js"></script>
-        
-        <style type="text/css">
-			html{height: 100%}
-			body{height: 100%; margin:0; padding: 0}
-			
-		</style>
-        
+	<script src="js/opc.js"></script>
+
+	<style type="text/css">
+		html {
+			height: 100%
+		}
+		body {
+			height: 100%;
+			margin: 0;
+			padding: 0
+		}
+
+	</style>
+
 </head>
 
 <body>
@@ -36,88 +44,87 @@
 
 		<!-- DIV de contenido de la página -->
 		<div data-role="content">
-			
-				<div data-role="fieldcontain">
 
-					<!-- campos de ingreso de texto -->
-					<fieldset>
-						<label for="descripcion"><strong>Descripción:</strong></label>
-						<textarea name="descripcion" id="descripcion" placeholder="Descripción..."></textarea>
-						<label for="cantidad"><strong>Cantidad:</strong></label>
-						<input type="number" name="cantidad" id="cantidad" autocomplete="off" placeholder="Cantidad" required>
-					</fieldset>
+			<div data-role="fieldcontain">
 
-					<!------////FOTO/////--->
-					<!-- switch de foto -->
-					<label for="tomarFoto">Tomar foto:</label>
-					<select name="tomarFoto" id="tomarFoto" data-role="slider" data-mini="true" onchange="tomarfoto(); return false">
-						<option value="no" selected="">No</option>
-						<option value="si" >Si</option>
-					</select>
-					<!-- div para la foto -->
-					<div id="fotoTomada">
-						
-							<input type="button" onclick="getPhoto()" value="tomar foto" />
-							<img id="imagen" width="200px" height="200px" />
-						
-					</div>
+				<!-- campos de ingreso de texto -->
+				<fieldset>
+					<label for="descripcion"><strong>Descripción:</strong></label>
+					<textarea name="descripcion" id="descripcion" placeholder="Descripción..."></textarea>
+					<label for="cantidad"><strong>Cantidad:</strong></label>
+					<input type="number" name="cantidad" id="cantidad" autocomplete="off" placeholder="Cantidad" required>
+				</fieldset>
 
-					<!------////UBICACION/////--->
-					<!-- switch de ubicacion -->
-					<label for="guardarUbicacion">Guardar ubicación:</label>
-					<select name="guardarUbicacion" id="guardarUbicacion" data-role="slider" data-mini="true" onchange="guardarubicacion()">
-						<option value="no" selected="">No</option>
-						<option value="si">Si</option>
-					</select>
-					<!-- div para la unicacion -->
-					<div id="ubicacion">
-						
-					</div>
+				<!------////FOTO/////--->
+				<!-- switch de foto -->
+				<label for="tomarFoto">Tomar foto:</label>
+				<select name="tomarFoto" id="tomarFoto" data-role="slider" data-mini="true" onchange="tomarfoto(); return false">
+					<option value="no" selected="">No</option>
+					<option value="si" >Si</option>
+				</select>
+				<!-- div para la foto -->
+				<div id="fotoTomada">
 
-					<!------////SUBMIT/////--->
-					
+					<input type="button" onclick="getPhoto()" value="tomar foto" />
+					<img id="imagen" width="200px" height="200px" />
 
 				</div>
-			
-			<button onclick="mapa()">locacion</button>
+
+				<!------////UBICACION/////--->
+				<!-- switch de ubicacion -->
+				<label for="guardarUbicacion">Guardar ubicación:</label>
+				<select name="guardarUbicacion" id="guardarUbicacion" data-role="slider" data-mini="true" onchange="guardarubicacion()">
+					<option value="no" selected="">No</option>
+					<option value="si">Si</option>
+				</select>
+				<!-- div para la unicacion -->
+				<div id="ubicacion">
+
+				</div>
+
+				<!------////SUBMIT/////--->
+
+			</div>
+
+			<!-- <button onclick="mapa()">locacion</button> -->
 			<div id="geolocation"></div>
-					<div id="map_fmat" style="width: 60%; height: 50%">
-			
-			<input type="button" value="Registrar" onclick="registrarIngreso()"/>
-		</div>
+			<div id="map_fmat" width="200px" height="200px">
 
-		<!-- MENU IZQUIERDO-->
-		<div data-role="panel" id="panelIzquierdo" data-theme="b" data-display="overlay">
-			<h2> Menú </h2>
-			<a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Cerar</a>
-			<ul data-role="listview" data-inset="false">
-				<li>
-					<a id="a1" class="ui-btn" href="registrarIngreso.html" >Registrar ingreso</a>
-				</li>
-				<li>
-					<a class="ui-btn" href="registrarEgreso.html" rel="external" >Registrar egreso</a>
-				</li>
-				<li>
-					<a class="ui-btn" href="recordatorio.html" rel="external" >Agregar recordatorio</a>
-				</li>
-				<li>
-					<a class="ui-btn" href="balance.html" rel="external"  >Balance</a>
-				</li>
-				<li>
-					<a class="ui-btn" href="#" rel="external">Exportar</a>
-				</li>
+				<input type="button" value="Registrar" onclick="registrarIngreso()"/>
+			</div>
 
-			</ul>
-		</div>
+			<!-- MENU IZQUIERDO-->
+			<div data-role="panel" id="panelIzquierdo" data-theme="b" data-display="overlay">
+				<h2> Menú </h2>
+				<a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Cerar</a>
+				<ul data-role="listview" data-inset="false">
+					<li>
+						<a id="a1" class="ui-btn" href="registrarIngreso.html" >Registrar ingreso</a>
+					</li>
+					<li>
+						<a class="ui-btn" href="registrarEgreso.html" rel="external" >Registrar egreso</a>
+					</li>
+					<li>
+						<a class="ui-btn" href="recordatorio.html" rel="external" >Agregar recordatorio</a>
+					</li>
+					<li>
+						<a class="ui-btn" href="balance.html" rel="external"  >Balance</a>
+					</li>
+					<li>
+						<a class="ui-btn" href="#" rel="external">Exportar</a>
+					</li>
 
-		<!-- FOOTER de la pagina -->
-		<footer data-role="footer" data-position="fixed" >
+				</ul>
+			</div>
 
-			<p style="font-size:72%;text-align:center">
-				© Elías Canché, Carlos Arjaujo Inc.  All rights reserved.
-			</p>
+			<!-- FOOTER de la pagina -->
+			<footer data-role="footer" data-position="fixed" >
 
-		</footer>
+				<p style="font-size:72%;text-align:center">
+					© Elías Canché, Carlos Arjaujo Inc.  All rights reserved.
+				</p>
+
+			</footer>
 	</section>
 </body>
 </html>

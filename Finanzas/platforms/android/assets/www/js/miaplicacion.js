@@ -321,6 +321,21 @@ function agregarRecordatorio() {
     }, function(err) {
         alert("An error occured");
     });
+    
+    cordova.plugins.notification.local.schedule({
+  id         : 2,
+  //title      : 'I will bother you every minute',
+   title: descripcion,
+    //sound: isAndroid ? 'file://sound.mp3' : 'file://beep.caf',
+  at         : new Date(new Date().getTime() + 5*1000)
+});
+    
+    // cordova.plugins.notification.local.schedule({
+    // id: 1,
+    // text: descripcion,
+    // sound: isAndroid ? 'file://sound.mp3' : 'file://beep.caf'
+//     
+// });
 
 }
 
