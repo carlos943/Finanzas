@@ -10,12 +10,12 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/miaplicacion.js"></script>
     <script src="js/opc.js"></script>
-    
+
     <script src="js/grafica.js"></script>
     <script src="js/excanvas.js"></script>
     <script src="js/jquery.jqplot.js"></script>
     <link rel="stylesheet" href="css/jquery.jqplot.css" />
-    
+
 </head>
 
 <body style="overflow: scroll">
@@ -35,9 +35,44 @@
             <p></p>
             <div id="prueba" style="overflow: scroll">    
             </div>
-           <div id="chartdiv" style="height:400px;width:300px; overflow: scroll;"></div>
-          
+            <div id="chartdiv" style="height:400px;width:300px; overflow: scroll;"></div>
+
         </div>
+
+        <!--        contenido tabla-->
+        <div   data-role="content" align="center" onload="obtenerIngresosTabla(); obtenerEgresosTabla();">
+
+            <table id="tablaIngresos">
+                     <thead>
+                           <tr>
+                                 <th >Descripción</th>
+                                 <th>Cantidad</th>
+                           </tr>
+                     </thead>
+                     <tbody >
+                           
+                    </tbody>
+                   </table>
+
+
+            <table  id="tablaEgresos">
+                     <thead>
+                           <tr>
+                                 <th >Descripción</th>
+                                 <th>Cantidad</th>
+                           </tr>
+                         </thead>
+                     <tbody   >
+<!--                           <tr>
+                                 <td>Descripcion 1</td>
+                                 <td>1941</td>
+                           </tr>-->
+                           
+                    </tbody>
+            </table>
+
+        </div>
+
 
         <!-- MENU IZQUIERDO-->
         <div data-role="panel" id="panelIzquierdo" data-theme="b" data-display="overlay">
@@ -63,7 +98,8 @@
 
             </ul>
         </div>
-        <button onclick="obtenerSesion();cargarBalance();">Cargar</button>
+        <button onclick="obtenerSesion();
+                cargarBalance();">Cargar</button>
         <div id="sesion"></div>
 
         <!-- FOOTER de la pagina -->

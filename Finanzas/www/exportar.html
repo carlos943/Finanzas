@@ -4,129 +4,24 @@
       <script src="js/archivos.js"></script>
     </head>  
 <body>
-<a href='#' onclick='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</a>
 
 <script type="text/javascript">  
-    var arregloIngreso=["nombre1","cantidad1","nombre2","cantidad2","nombre3","cantidad3"];
-    var arregloEgreso=["nombre1","cantidad1","nombre2","cantidad2"];
-    var balanceActual="Balance_Actual";
-    var stockData=[];
-    var contenido;
+var data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
+//var csvContent = "data:text/csv;charset=utf-8,";
+var csvContent;
+data.forEach(function(infoArray, index){
+
+   dataString = infoArray.join(",");
+   csvContent += index < data.length ? dataString+ "\n" : dataString;
+
+}); 
+//var encodedUri = encodeURI(csvContent);
+//window.open(encodedUri);
+
+function guardar(){
+    saveFile("gastos.csv",data)
     
-    var numeroIngresos=arregloIngreso.length;
-    var numeroEgresos=arregloEgreso.length;
-    var numeroTotal;
-    obtenerNumeroTotal();
-    
-    function obtenerNumeroTotal(){
-      if(numeroIngresos>numeroEgresos){
-          numeroTotal= numeroIngresos;
-      }else{
-          numeroTotal= numeroEgresos;
-      } 
-      
-      crearArregloCSV(balanceActual,arregloIngreso,arregloEgreso);
-    };
-
-    
-    function crearArregloCSV(balanceActual,arregloIngreso,arregloEgreso){
- 
-        for(var i=0; i<numeroTotal;i=i+2 ){
-           stockData.push({
-            Balance_Actual: balanceActual,
-            NombreIngreso: arregloIngreso[i],
-            Ingresos: arregloIngreso[i+1],
-            nombreEgreso: arregloEgreso[i],
-            Egresos: arregloEgreso[i+1]});
-        }
-    }
-    
-    
-    
-//    var stockData = [
-//        {
-//            Balance_Actual: "1",
-//            NombreIngreso: "nombreIngreso",
-//            Ingresos: "1256.56",
-//            nombreEgreso: "nombreEgreso",
-//            Egresos: "132.54"
-//        },
-//        {
-//            Balance_Actual: "1",
-//            NombreIngreso: "nombreIngreso",
-//            Ingresos: "1256.56",
-//            nombreEgreso: "nombreEgreso",
-//            Egresos: "132.54"
-//        },
-//        {
-//            Balance_Actual: "1",
-//            NombreIngreso: "nombreIngreso",
-//            Ingresos: "1256.56",
-//            nombreEgreso: "nombreEgreso",
-//            Egresos: "132.54"
-//        },
-//    ];
-//    
-    
-
-    function convertArrayOfObjectsToCSV(args) {
-        //crearArregloCSV(balanceActual,arregloIngreso,arregloEgreso);
-        var result, ctr, keys, columnDelimiter, lineDelimiter, data;
-
-        data = args.data || null;
-        if (data == null || !data.length) {
-            return null;
-        }
-
-        columnDelimiter = args.columnDelimiter || ',';
-        lineDelimiter = args.lineDelimiter || '\n';
-
-        keys = Object.keys(data[0]);
-
-        result = '';
-        result += keys.join(columnDelimiter);
-        result += lineDelimiter;
-
-        data.forEach(function(item) {
-            ctr = 0;
-            keys.forEach(function(key) {
-                if (ctr > 0) result += columnDelimiter;
-
-                result += item[key];
-                ctr++;
-            });
-            result += lineDelimiter;
-        });
-
-        return result;
-    }
-
-    window.downloadCSV = function(args) {
-        var data, filename, link;
-
-        var csv = convertArrayOfObjectsToCSV({
-            data: stockData
-        });
-        if (csv == null) return;
-
-        filename = args.filename || 'export.csv';
-
-        if (!csv.match(/^data:text\/csv/i)) {
-            csv = 'data:text/csv;charset=utf-8,' + csv;
-        }
-        data = encodeURI(csv);
-
-        link = document.createElement('a');
-        link.setAttribute('href', data);
-        link.setAttribute('download', filename);
-        link.click();
-    }
-
-        function guardar(){
-            convertArrayOfObjectsToCSV(stockData);
-            saveFile("gastos.csv",contenido);
-            alert("agregado");
-        }
+}
 </script> 
 
 <div><button onclick="guardar();" >Guardar css</button></div>

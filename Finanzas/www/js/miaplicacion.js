@@ -81,12 +81,12 @@ function onVolumeUp() {
 
     var ultimoAncho = parseInt($("#chartdiv").css("width"));
     var ultimoLargo = parseInt($("#chartdiv").css("height"));
-    
+
     cargarBalance();
 }
 
 function onVolumeDown() {
-     var ultimoAncho = parseInt($("#chartdiv").css("width"));
+    var ultimoAncho = parseInt($("#chartdiv").css("width"));
     var ultimoLargo = parseInt($("#chartdiv").css("height"));
 
     $("#chartdiv").remove();
@@ -98,7 +98,7 @@ function onVolumeDown() {
 
     var ultimoAncho = parseInt($("#chartdiv").css("width"));
     var ultimoLargo = parseInt($("#chartdiv").css("height"));
-    
+
     cargarBalance();
 }
 
@@ -175,6 +175,51 @@ function add() {
     });
 
 }
+
+function obtenerIngresosTabla() {
+    var tablaIngreso = $("#tablaIngresos");
+
+    db.transaction(function(tx) {
+
+        tx.executeSql('SELECT * FROM ingreso', [], function(tx, results) {
+            for (var i = 0; i < res.rows.length; i++) {
+                //arr.push(res.rows.item(i).cantidad);
+                tablaIngreso.append("<tr>"+
+                                 "<td>"+res.rows.item(i).descripcion+"</td>"+
+                                 "<td>"+res.rows.item(i).cantidad+"</td>"+
+                           "</tr>");
+            }
+
+        }, function(err) {
+            alert("An error occured while saving the note");
+        });
+    });
+}
+
+function obtenerEgresosTabla() {
+    var tablaIngreso = $("#tablaEgresos");
+
+    db.transaction(function(tx) {
+
+        tx.executeSql('SELECT * FROM egreso', [], function(tx, results) {
+            for (var i = 0; i < res.rows.length; i++) {
+                //arr.push(res.rows.item(i).cantidad);
+                tablaIngreso.append("<tr>"+
+                                 "<td>"+res.rows.item(i).descripcion+"</td>"+
+                                 "<td>"+res.rows.item(i).cantidad+"</td>"+
+                           "</tr>");
+            }
+
+        }, function(err) {
+            alert("An error occured while saving the note");
+        });
+    });
+}
+      
+
+        
+
+
 
 function obtenerSesion() {
 
@@ -321,15 +366,15 @@ function agregarRecordatorio() {
     }, function(err) {
         alert("An error occured");
     });
-    
+
     cordova.plugins.notification.local.schedule({
-  id         : 2,
-  //title      : 'I will bother you every minute',
-   title: descripcion,
-    //sound: isAndroid ? 'file://sound.mp3' : 'file://beep.caf',
-  at         : new Date(new Date().getTime() + 5*1000)
-});
-    
+        id: 2,
+        //title      : 'I will bother you every minute',
+        title: descripcion,
+        //sound: isAndroid ? 'file://sound.mp3' : 'file://beep.caf',
+        at: new Date(new Date().getTime() + 5 * 1000)
+    });
+
     // cordova.plugins.notification.local.schedule({
     // id: 1,
     // text: descripcion,
