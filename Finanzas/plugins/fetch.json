@@ -73,5 +73,13 @@
         "variables": {
             "API_KEY_FOR_ANDROID": "AIzaSyAoTVnRpsOJO8RV_dRfI5Qq3pH4ft2NUDI"
         }
+    },
+    "cordova-plugin-file": {
+        "source": {
+            "type": "registry",
+            "id": "cordova-plugin-file"
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
