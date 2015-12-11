@@ -5,9 +5,9 @@
       <script src="js/archivos.js"></script>
     </head>  
 <body>
-<a href='#' onclick='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</a>
 
 <script type="text/javascript">  
+<<<<<<< HEAD
     var arregloIngreso=["nombre1","cantidad1","nombre2","cantidad2","nombre3","cantidad3"];
     var arregloEgreso=["nombre1","cantidad1","nombre2","cantidad2"];
     var balanceActual="Balance_Actual";
@@ -78,12 +78,21 @@
         if (data == null || !data.length) {
             return null;
         }
+=======
+var data = [["name1", "city1", "some other info"], ["name2", "city2", "more info"]];
+//var csvContent = "data:text/csv;charset=utf-8,";
+var csvContent;
+data.forEach(function(infoArray, index){
+>>>>>>> 7ecb347791b290d4906e3fd9b964ef099796659a
 
-        columnDelimiter = args.columnDelimiter || ',';
-        lineDelimiter = args.lineDelimiter || '\n';
+   dataString = infoArray.join(",");
+   csvContent += index < data.length ? dataString+ "\n" : dataString;
 
-        keys = Object.keys(data[0]);
+}); 
+//var encodedUri = encodeURI(csvContent);
+//window.open(encodedUri);
 
+<<<<<<< HEAD
         result = '';
         result += keys.join(columnDelimiter);
         result += lineDelimiter;
@@ -130,6 +139,12 @@
             saveFile("gastos.txt",contenido);
             alert("agregado");
         }
+=======
+function guardar(){
+    saveFile("gastos.csv",data)
+    
+}
+>>>>>>> 7ecb347791b290d4906e3fd9b964ef099796659a
 </script> 
 
 <div><button onclick="guardar();" >Guardar css</button></div>

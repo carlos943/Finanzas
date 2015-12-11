@@ -151,7 +151,11 @@ function saveFile(filename, content) {
 		fileEntry.createWriter(function(fileWriter) {
 			var fileParts = [content];
 			var contentBlob = new Blob(fileParts, {
+<<<<<<< HEAD
 				type : 'text/html'
+=======
+				type : 'text/csv'
+>>>>>>> 7ecb347791b290d4906e3fd9b964ef099796659a
 			});
 			fileWriter.write(contentBlob);
 

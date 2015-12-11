@@ -79,12 +79,12 @@ function onVolumeUp() {
 
     var ultimoAncho = parseInt($("#chartdiv").css("width"));
     var ultimoLargo = parseInt($("#chartdiv").css("height"));
-    
+
     cargarBalance();
 }
 
 function onVolumeDown() {
-     var ultimoAncho = parseInt($("#chartdiv").css("width"));
+    var ultimoAncho = parseInt($("#chartdiv").css("width"));
     var ultimoLargo = parseInt($("#chartdiv").css("height"));
 
     $("#chartdiv").remove();
@@ -96,7 +96,7 @@ function onVolumeDown() {
 
     var ultimoAncho = parseInt($("#chartdiv").css("width"));
     var ultimoLargo = parseInt($("#chartdiv").css("height"));
-    
+
     cargarBalance();
 }
 
@@ -174,6 +174,53 @@ function add() {
 
 }
 
+function obtenerIngresosTabla() {
+	
+    var tablaIngreso = document.getElementById('tablaIngresos');
+
+    db.transaction(function(tx) {
+
+        tx.executeSql('SELECT * FROM ingreso where usuario=?', [sesion], function(tx, res) {
+            for (var i = 0; i < res.rows.length; i++) {
+                //arr.push(res.rows.item(i).cantidad);
+                //alert(res.rows.item(i).descripcion);
+                tablaIngreso.innerHTML+="<tr>"+
+                      "<td>"+res.rows.item(i).descripcion+"</td>"+
+                        "<td>"+res.rows.item(i).cantidad+"</td>"+
+                       "</tr>";
+            }
+
+        }, function(err) {
+            alert("An error occured while saving the note");
+        });
+    });
+}
+
+function obtenerEgresosTabla() {
+    var tablaIngreso = document.getElementById('tablaEgresos');
+
+    db.transaction(function(tx) {
+
+        tx.executeSql('SELECT * FROM egreso where usuario=?', [sesion], function(tx, res) {
+            for (var i = 0; i < res.rows.length; i++) {
+                //arr.push(res.rows.item(i).cantidad);
+                tablaIngreso.innerHTML+="<tr>"+
+                       "<td>"+res.rows.item(i).descripcion+"</td>"+
+                        "<td>"+res.rows.item(i).cantidad+"</td>"+
+                        "</tr>";
+            }
+
+        }, function(err) {
+            alert("An error occured while saving the note");
+        });
+    });
+}
+      
+
+        
+
+
+
 function obtenerSesion() {
 
     db.transaction(function(tx) {
@@ -206,7 +253,7 @@ function registrarIngreso() {
 
     db.transaction(function(tx) {
 
-        tx.executeSql('SELECT * FROM balance', [], function(tx, results) {
+        tx.executeSql('SELECT * FROM balance where usuario=?', [sesion], function(tx, results) {
             //for (var i=0; i < ; i++) {
             alert(results.rows.item(results.rows.length - 1).cantidad);
             var anterior = results.rows.item(results.rows.length - 1).cantidad;
@@ -242,7 +289,7 @@ function registrarEgreso() {
     var cadenafecha = "prueba";
     db.transaction(function(tx) {
         tx.executeSql("INSERT INTO egreso (usuario, cantidad, descripcion) VALUES (?,?,?)", [sesion, cantidad, descripcion], function(tx, res) {
-            alert("ingreso agregado");
+            //alert("ingreso agregado");
         });
     }, function(err) {
         alert("Ocurrio un error");
@@ -251,7 +298,7 @@ function registrarEgreso() {
 
     db.transaction(function(tx) {
 
-        tx.executeSql('SELECT * FROM balance', [], function(tx, results) {
+        tx.executeSql('SELECT * FROM balance where usuario=?', [sesion], function(tx, results) {
             //for (var i=0; i < ; i++) {
             alert(results.rows.item(results.rows.length - 1).cantidad);
             var anterior = results.rows.item(results.rows.length - 1).cantidad;
@@ -261,7 +308,7 @@ function registrarEgreso() {
             db.transaction(function(tx) {
                 tx.executeSql("INSERT INTO balance (usuario, cantidad) VALUES (?,?)", [sesion, cantidadNueva], function(tx, res) {
 
-                    alert("ahora tienes " + cantidadNueva);
+                    alert("Ahora tienes " + cantidadNueva);
                 });
             }, function(err) {
                 alert("Ocurrio un error");
@@ -314,20 +361,20 @@ function agregarRecordatorio() {
     db.transaction(function(tx) {
         tx.executeSql("INSERT INTO recordatorio (usuario, fecha, descripcion) VALUES (?,?,?)", [sesion, fecha, descripcion], function(tx, res) {
 
-            alert("recordatorio agregado");
+            alert("Recordatorio agregado");
         });
     }, function(err) {
         alert("Ocurrio un error");
     });
-    
+
     cordova.plugins.notification.local.schedule({
-  id         : 2,
-  //title      : 'I will bother you every minute',
-   title: descripcion,
-    //sound: isAndroid ? 'file://sound.mp3' : 'file://beep.caf',
-  at         : new Date(new Date().getTime() + 5*1000)
-});
-    
+        id: 2,
+        //title      : 'I will bother you every minute',
+        title: descripcion,
+        //sound: isAndroid ? 'file://sound.mp3' : 'file://beep.caf',
+        at: new Date(new Date().getTime() + 5 * 1000)
+    });
+
     // cordova.plugins.notification.local.schedule({
     // id: 1,
     // text: descripcion,

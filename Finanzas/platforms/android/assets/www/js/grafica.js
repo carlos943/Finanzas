@@ -1,3 +1,12 @@
+
+
+document.addEventListener("deviceready", function() {
+	obtenerSesion();
+cargarBalance();
+obtenerIngresosTabla();
+obtenerEgresosTabla();
+});
+
  $(function() {
 
 
