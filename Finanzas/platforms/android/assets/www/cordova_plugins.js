@@ -237,6 +237,14 @@ module.exports = [
             "cordova"
         ],
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-vibration/www/vibration.js",
+        "id": "cordova-plugin-vibration.notification",
+        "merges": [
+            "navigator.notification",
+            "navigator"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -251,6 +259,7 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "3.0.0",
     "plugin.google.maps": "1.3.7",
     "cordova-plugin-file": "3.0.0",
+    "cordova-plugin-vibration": "2.0.0",
     "cordova-plugin-registerusernotificationsettings": "1.0.2"
 }
 // BOTTOM OF METADATA

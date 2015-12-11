@@ -204,7 +204,7 @@ function obtenerEgresosTabla() {
         tx.executeSql('SELECT * FROM egreso where usuario=?', [sesion], function(tx, res) {
             for (var i = 0; i < res.rows.length; i++) {
                 //arr.push(res.rows.item(i).cantidad);
-                tablaIngreso.append+="<tr>"+
+                tablaIngreso.innerHTML+="<tr>"+
                        "<td>"+res.rows.item(i).descripcion+"</td>"+
                         "<td>"+res.rows.item(i).cantidad+"</td>"+
                         "</tr>";
@@ -304,11 +304,16 @@ function registrarEgreso() {
             var anterior = results.rows.item(results.rows.length - 1).cantidad;
 
             cantidadNueva = parseInt(anterior) - parseInt(cantidad);
+            
 
             db.transaction(function(tx) {
                 tx.executeSql("INSERT INTO balance (usuario, cantidad) VALUES (?,?)", [sesion, cantidadNueva], function(tx, res) {
-
+					if(cantidadNueva<0){
+						navigator.vibrate(500);
+            			alert("Tu balance es negativo!! Ahora tienes " + cantidadNueva);
+            		}else{
                     alert("Ahora tienes " + cantidadNueva);
+                   }
                 });
             }, function(err) {
                 alert("Ocurrio un error");
