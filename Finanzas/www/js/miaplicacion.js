@@ -15,10 +15,8 @@ document.addEventListener("deviceready", function() {
         tx.executeSql("CREATE TABLE IF NOT EXISTS recordatorio (usuario, fecha, descripcion )");
 
     }, function(err) {
-        alert("An error occurred while initializing the app");
+        alert("Ocurrio un error");
     });
-
-
 
 
 }, false);
@@ -111,7 +109,7 @@ function check_login() {
         tx.executeSql('DROP TABLE IF EXISTS sesion');
         tx.executeSql("CREATE TABLE IF NOT EXISTS sesion (usuario)");
         tx.executeSql("INSERT INTO sesion (usuario) VALUES (?)", [username], function(tx, res) {
-            alert("sesion agregado");
+            //alert("sesion agregado");
         });
     });
 
@@ -163,7 +161,7 @@ function add() {
             alert("Usuario agregado");
         });
     }, function(err) {
-        alert("An error occured while saving the note");
+        alert("Ocurrio un error");
     });
 
     db.transaction(function(tx) {
@@ -171,7 +169,7 @@ function add() {
             alert("Balance agregado");
         });
     }, function(err) {
-        alert("An error occured while saving the note");
+        alert("Ocurrio un error");
     });
 
 }
@@ -202,7 +200,7 @@ function registrarIngreso() {
             alert("ingreso agregado");
         });
     }, function(err) {
-        alert("An error occured while saving the note");
+        alert("Ocurrio un error");
     });
 
 
@@ -221,7 +219,7 @@ function registrarIngreso() {
                     alert("ahora tienes " + cantidadNueva);
                 });
             }, function(err) {
-                alert("An error occured while saving the note");
+                alert("Ocurrio un error");
             });
 
             //cantidadAnterior=results.rows.item(0).cantidad;
@@ -247,7 +245,7 @@ function registrarEgreso() {
             alert("ingreso agregado");
         });
     }, function(err) {
-        alert("An error occured while saving the note");
+        alert("Ocurrio un error");
     });
 
 
@@ -266,7 +264,7 @@ function registrarEgreso() {
                     alert("ahora tienes " + cantidadNueva);
                 });
             }, function(err) {
-                alert("An error occured while saving the note");
+                alert("Ocurrio un error");
             });
 
             //cantidadAnterior=results.rows.item(0).cantidad;
@@ -304,7 +302,7 @@ function cargarBalance() {
             });
         });
     }, function(err) {
-        alert("An error occured while saving the note");
+        alert("Ocurrio un error");
     });
 }
 
@@ -319,7 +317,7 @@ function agregarRecordatorio() {
             alert("recordatorio agregado");
         });
     }, function(err) {
-        alert("An error occured");
+        alert("Ocurrio un error");
     });
     
     cordova.plugins.notification.local.schedule({

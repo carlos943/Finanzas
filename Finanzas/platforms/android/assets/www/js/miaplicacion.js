@@ -19,7 +19,8 @@ document.addEventListener("deviceready", function() {
     });
 
 
-
+obtenerSesion();
+cargarBalance();
 
 }, false);
 
@@ -111,7 +112,7 @@ function check_login() {
         tx.executeSql('DROP TABLE IF EXISTS sesion');
         tx.executeSql("CREATE TABLE IF NOT EXISTS sesion (usuario)");
         tx.executeSql("INSERT INTO sesion (usuario) VALUES (?)", [username], function(tx, res) {
-            alert("sesion agregado");
+            //alert("sesion agregado");
         });
     });
 

@@ -27,7 +27,7 @@ function geolocationSuccess(position) {
 	var longitud = position.coords.longitude;
 
 	var element = document.getElementById('geolocation');
-	element.innerHTML = 'Latitude: ' + latitud + '<br />' + 'Longitude: ' + longitud + '<br />' + '<hr />';
+	element.innerHTML = 'Tu localizacion es: <br /> Latitude: ' + latitud + '<br />' + 'Longitude: ' + longitud + '<br />' + '<hr />';
 
 
 	// var map = new GMaps({
@@ -36,7 +36,7 @@ function geolocationSuccess(position) {
       // lng: longitud
     // });
 //     
-	crearMapa(latitud, longitud);
+	//crearMapa(latitud, longitud);
 }
 
 function crearMapa(latitud, longitud) {
@@ -64,22 +64,22 @@ function geolocationError() {
 }
 
 
-function drawMap(position){
-	var latitud = position.coords.latitude;
-	var longitud = position.coords.longitude;
-
-	var element = document.getElementById('geolocation');
-	element.innerHTML = 'Latitude: ' + latitud + '<br />' + 'Longitude: ' + longitud + '<br />' + '<hr />'; 
-    var CENTER = new plugin.google.maps.LatLng(latitud, longitud);
-
-    var div = document.getElementById("map_fmat");
-
-    // Initialize the map view
-    var map = plugin.google.maps.Map.getMap(div, {
-        camera: {
-            latLng: CENTER,
-            zoom: 13
-        }
-    });
-}
+// function drawMap(position){
+	// var latitud = position.coords.latitude;
+	// var longitud = position.coords.longitude;
+// 
+	// var element = document.getElementById('geolocation');
+	// element.innerHTML = 'Latitude: ' + latitud + '<br />' + 'Longitude: ' + longitud + '<br />' + '<hr />'; 
+    // var CENTER = new plugin.google.maps.LatLng(latitud, longitud);
+// 
+    // var div = document.getElementById("map_fmat");
+// 
+    // // Initialize the map view
+    // var map = plugin.google.maps.Map.getMap(div, {
+        // camera: {
+            // latLng: CENTER,
+            // zoom: 13
+        // }
+    // });
+// }
 //google.maps.event.addDomListener(window, 'load', crearMapa);

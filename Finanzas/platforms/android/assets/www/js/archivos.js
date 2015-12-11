@@ -1,9 +1,9 @@
-document.addEventListener("deviceready", deviceReady, false);
+document.addEventListener("deviceready", iniciaArchivos, false);
 var filesystem = null;
 var messageBox;
 
-function deviceReady() {
-
+function iniciaArchivos() {
+ alert("si funciona");
 	// Allow for vendor prefixes.
 	window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
 	messageBox = document.getElementById('messages');
@@ -128,6 +128,7 @@ function desplegarNota(nombre, contenido) {
 //////////////////////////////////
 function agregarNota() {
 	//var nombre = document.getElementById('nombreNota');
+	
         var nombre = "cuentas";
 	var contenido = document.getElementById('contenidoNota');
         
@@ -140,8 +141,9 @@ function agregarNota() {
 };
 
 function saveFile(filename, content) {
-    
+    alert("si entra");
 	var rutaArchivo = filename;
+	alert(rutaArchivo);
 	filesystem.root.getFile(rutaArchivo, {
 		create : true
 	}, function(fileEntry) {
@@ -149,12 +151,12 @@ function saveFile(filename, content) {
 		fileEntry.createWriter(function(fileWriter) {
 			var fileParts = [content];
 			var contentBlob = new Blob(fileParts, {
-				type : 'text/plain'
+				type : 'text/html'
 			});
 			fileWriter.write(contentBlob);
 
 			fileWriter.onwriteend = function(e) {
-
+				alert("exito");
 			};
 
 			fileWriter.onerror = function(e) {

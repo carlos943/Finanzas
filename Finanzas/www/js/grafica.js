@@ -1,3 +1,10 @@
+
+
+document.addEventListener("deviceready", function() {
+	obtenerSesion();
+cargarBalance();
+});
+
  $(function() {
 
 

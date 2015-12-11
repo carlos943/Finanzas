@@ -1,6 +1,7 @@
 <!doctype html>  
 <html>  
     <head>
+    	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
       <script src="js/archivos.js"></script>
     </head>  
 <body>
@@ -11,7 +12,7 @@
     var arregloEgreso=["nombre1","cantidad1","nombre2","cantidad2"];
     var balanceActual="Balance_Actual";
     var stockData=[];
-    var contenido;
+    var contenido="holaaa";
     
     var numeroIngresos=arregloIngreso.length;
     var numeroEgresos=arregloEgreso.length;
@@ -98,7 +99,7 @@
             result += lineDelimiter;
         });
 
-        return result;
+        contenido= result;
     }
 
     window.downloadCSV = function(args) {
@@ -120,11 +121,13 @@
         link.setAttribute('href', data);
         link.setAttribute('download', filename);
         link.click();
-    }
+    };
 
         function guardar(){
-            convertArrayOfObjectsToCSV(stockData);
-            saveFile("gastos.csv",contenido);
+            //convertArrayOfObjectsToCSV(stockData);
+            //alert(stockData);
+            alert(contenido);
+            saveFile("gastos.txt",contenido);
             alert("agregado");
         }
 </script> 

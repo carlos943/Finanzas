@@ -1,7 +1,8 @@
 <!doctype html>  
 <html>  
     <head>
-        <script src="js/archivos.js"></script>
+    	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+      <script src="js/archivos.js"></script>
     </head>  
 <body>
 <a href='#' onclick='downloadCSV({ filename: "stock-data.csv" });'>Download CSV</a>
@@ -11,7 +12,7 @@
     var arregloEgreso=["nombre1","cantidad1","nombre2","cantidad2"];
     var balanceActual="Balance_Actual";
     var stockData=[];
-    var contenido;
+    var contenido="holaaa";
     
     var numeroIngresos=arregloIngreso.length;
     var numeroEgresos=arregloEgreso.length;
@@ -70,7 +71,7 @@
     
 
     function convertArrayOfObjectsToCSV(args) {
-        crearArregloCSV(balanceActual,arregloIngreso,arregloEgreso);
+        //crearArregloCSV(balanceActual,arregloIngreso,arregloEgreso);
         var result, ctr, keys, columnDelimiter, lineDelimiter, data;
 
         data = args.data || null;
@@ -101,30 +102,33 @@
         contenido= result;
     }
 
-//    window.downloadCSV = function(args) {
-//        var data, filename, link;
-//
-//        var csv = convertArrayOfObjectsToCSV({
-//            data: stockData
-//        });
-//        if (csv == null) return;
-//
-//        filename = args.filename || 'export.csv';
-//
-//        if (!csv.match(/^data:text\/csv/i)) {
-//            csv = 'data:text/csv;charset=utf-8,' + csv;
-//        }
-//        data = encodeURI(csv);
-//
-//        link = document.createElement('a');
-//        link.setAttribute('href', data);
-//        link.setAttribute('download', filename);
-//        link.click();
-//    }
+    window.downloadCSV = function(args) {
+        var data, filename, link;
+
+        var csv = convertArrayOfObjectsToCSV({
+            data: stockData
+        });
+        if (csv == null) return;
+
+        filename = args.filename || 'export.csv';
+
+        if (!csv.match(/^data:text\/csv/i)) {
+            csv = 'data:text/csv;charset=utf-8,' + csv;
+        }
+        data = encodeURI(csv);
+
+        link = document.createElement('a');
+        link.setAttribute('href', data);
+        link.setAttribute('download', filename);
+        link.click();
+    };
 
         function guardar(){
-            convertArrayOfObjectsToCSV(stockData);
-            saveFile("gastos.csv",contenido);
+            //convertArrayOfObjectsToCSV(stockData);
+            //alert(stockData);
+            alert(contenido);
+            saveFile("gastos.txt",contenido);
+            alert("agregado");
         }
 </script> 
 
