@@ -93,5 +93,29 @@ $(function() {
     $("#a4").css({
         "unselectable": "on"
     });
+    
+    $("#a5").css({
+        "background-color": "#2AD",
+        "border-color": "#2AD",
+        "color": "#FFF",
+        "text-shadow": "0px 1px 0px #08B",
+        "cursor": "pointer"
+    });
+
+    $("#a5").css({
+        "unselectable": "on"
+    });
+    
+    $("#a6").css({
+        "background-color": "#2AD",
+        "border-color": "#2AD",
+        "color": "#FFF",
+        "text-shadow": "0px 1px 0px #08B",
+        "cursor": "pointer"
+    });
+
+    $("#a6").css({
+        "unselectable": "on"
+    });
 
 });

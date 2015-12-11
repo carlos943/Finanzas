@@ -1,204 +1,211 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="UTF-8"/>
+    <head>
+        <meta charset="UTF-8"/>
 
 
-	<script  src="js/jquery-2.1.4.min.js" ></script>
-	<script  src="js/jquery.mobile-1.4.5.js" ></script>
-	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
-	<script type="text/javascript" src="js/miaplicacion.js"></script>
+        <script  src="js/jquery-2.1.4.min.js" ></script>
+        <script  src="js/jquery.mobile-1.4.5.js" ></script>
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+        <script type="text/javascript" src="js/miaplicacion.js"></script>
 
-	<script type="text/javascript" src="js/mapa.js"></script>
-	<script type="text/javascript" src="js/fotos.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+        <script type="text/javascript" src="js/mapa.js"></script>
+        <script type="text/javascript" src="js/fotos.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
 
-	<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-	<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script> -->
-	<script src="js/menu.js"></script>
-	<link rel="stylesheet" href="css/menu.css" />
-	<script src="js/opc.js"></script>
-	<!-- <link rel="stylesheet" href="themes/azulverde.min.css" /> -->
-<!-- <script type="text/javascript">
-	//Add Event Listener
-		document.addEventListener("deviceready", cargacontactos, false);
-		// Create Functions
-		function cargacontactos() {
-			alert("pasa1");
-		var options = new ContactFindOptions();
-		options.filter="";
-		options.multiple=true;
-		var fields = ["*"];
-		navigator.contacts.find(fields, exitoCont, errorCont, options);
-		}
-		
-		
-		function exitoCont(contacts) {
-			alert("pasa exito");
-		for (var i = 0; i < contacts.length; i++) {
-		$("#contactList").append("<li>             <h1>"+contacts[i].phoneNumber[0].value+"</h1></li>");
-		$("#contactList").listview("refresh");
-		}
-		}
-
-		function errorCont()
-		{
-		alert("Some Error Occured");
-		}
-</script> -->
-
-
-</head>
-
-<body>
-
-	<section data-role="page" id="registrarIngreso"  data-position="fixed" data-url="registrarIngreso">
-
-		<!-- HEADER de la página -->
-		<div data-role="header" data-position="fixed" >
-			<h1>Lista de Prestamos</h1>
-			<!-- icono de panel izquierdo -->
-			<a href="#panelIzquierdo" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
-
-		</div>
-
-		<!-- DIV de contenido de la página -->
-		<div data-role="content">
-			
-			<div   data-role="content" align="center" >
-			<h4>Prestamos</h4>
-            <table id="tablaPrestamos">
-                     <thead>
-                           <tr>
-                                 <th >Contacto</th>
-                                 <th>Modalidad</th>
-                        		<th>Cantidad</th>
-                           </tr>
-                     </thead>
-                     <tbody >
-                           
-                    </tbody>
-                   </table>
-
- <script type="text/javascript">
- var seleccionado;
- 
- document.addEventListener("deviceready", init, false);
-function init() {
-	obtenerSesion();
-	obtenerPrestamosTabla();
-	 navigator.contacts.find(
- [navigator.contacts.fieldType.displayName],
- gotContacts,
- errorHandler);
-
-}
-function errorHandler(e) {
- console.log("errorHandler: "+e);
-}
-
-function clicked(item) {
-    
-   }
-   
-   function obtenerPrestamosTabla() {
-	var tablaIngreso = document.getElementById('tablaPrestamos');
-
-	db.transaction(function(tx) {
-
-		tx.executeSql('SELECT * FROM prestamo where usuario=?', [sesion], function(tx, res) {
-			for (var i = 0; i < res.rows.length; i++) {
-				//arr.push(res.rows.item(i).cantidad);
-				tablaIngreso.innerHTML += "<tr>" + "<td>" + res.rows.item(i).contacto + "</td>" + "<td>" + res.rows.item(i).modalidad + "</td>" +  "<td>" + res.rows.item(i).cantidad + "</td>" +"</tr>";
-			}
-
-		}, function(err) {
-			alert("An error occured while saving the note");
-		});
-	});
-}
-
-function gotContacts(c) {
- console.log("gotContacts, number of results "+c.length);
-
- mobileDiv = document.querySelector("#mobile");
- emailDiv = document.querySelector("#email");
-
- /* Retriving phoneNumbers */
- for(var i=0, len=c.length; i<len; i++) {
- if(c[i].phoneNumbers && c[i].phoneNumbers.length >0) {
- 	
- mobileDiv.innerHTML += "<div id='"+c[i].displayName+"'  onclick='seleccionarContacto(this)'>"+c[i].displayName+"<br/>"+c[i].phoneNumbers[0].value+"</div><br/>";
- 
- }
- }
-
- /* Retriving Email */
- 
-}
-
-function seleccionarContacto(item){
-	seleccionado=$(item).attr("id");;
-	document.getElementById("seleccionado").innerHTML=seleccionado;
-}
-
-function registrarPrestamo() {
-	obtenerSesion();
-
-	var cantidad = document.getElementById("cantidad").value;
-	
-	var e = document.getElementById("modalidad");
-var modo = e.options[e.selectedIndex].text;
-	if (cantidad==""){
-		alert("No dejes espacios vacíos");
-	}else{
-	var fecha = new Date();
-	//var cadenafecha=fecha.getDate()+"/"+fecha.getMonth()+1;
-	var cadenafecha = "prueba";
-	db.transaction(function(tx) {
-		tx.executeSql("INSERT INTO prestamo (usuario, contacto,modalidad ,cantidad) VALUES (?,?,?,?)", [sesion, seleccionado,modo, cantidad], function(tx, res) {
-			alert("Prestamo agregado");
-		});
-	}, function(err) {
-		alert("Ocurrio un error");
-	});
-
-	
-}
-}
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script> -->
+        <script src="js/menu.js"></script>
+        <link rel="stylesheet" href="css/menu.css" />
+        <script src="js/opc.js"></script>
+        <!-- <link rel="stylesheet" href="themes/azulverde.min.css" /> -->
+        <!-- <script type="text/javascript">
+                //Add Event Listener
+                        document.addEventListener("deviceready", cargacontactos, false);
+                        // Create Functions
+                        function cargacontactos() {
+                                alert("pasa1");
+                        var options = new ContactFindOptions();
+                        options.filter="";
+                        options.multiple=true;
+                        var fields = ["*"];
+                        navigator.contacts.find(fields, exitoCont, errorCont, options);
+                        }
+                        
+                        
+                        function exitoCont(contacts) {
+                                alert("pasa exito");
+                        for (var i = 0; i < contacts.length; i++) {
+                        $("#contactList").append("<li>             <h1>"+contacts[i].phoneNumber[0].value+"</h1></li>");
+                        $("#contactList").listview("refresh");
+                        }
+                        }
+        
+                        function errorCont()
+                        {
+                        alert("Some Error Occured");
+                        }
+        </script> -->
 
 
- </script>
-			
-		</div>
-		<div data-role="panel" id="panelIzquierdo"  data-display="overlay">
-			<h2> Menú </h2>
-			<a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Cerrar</a>
-			<ul data-role="listview" data-inset="false">
-				<li>
-					<a id="a1" class="ui-btn" href="registrarIngreso.html" >Registrar ingreso</a>
-				</li>
-				<li>
-					<a class="ui-btn" href="registrarEgreso.html" rel="external" >Registrar egreso</a>
-				</li>
-				<li>
-					<a class="ui-btn" href="recordatorio.html" rel="external" >Agregar recordatorio</a>
-				</li>
-				<li>
-					<a class="ui-btn" href="balance.html" rel="external"  >Balance</a>
-				</li>
+    </head>
 
-			</ul>
-		</div>
+    <body>
 
-		<!-- FOOTER de la pagina -->
-		<footer data-role="footer" data-position="fixed" >
+        <section data-role="page" id="listaPrestamos"  data-position="fixed" data-url="listaPrestamos">
 
-			<p style="font-size:72%;text-align:center">
-				© Elías Canché, Carlos Araujo Inc.  All rights reserved.
-			</p>
+            <!-- HEADER de la página -->
+            <div data-role="header" data-position="fixed" >
+                <h1>Lista de Prestamos</h1>
+                <!-- icono de panel izquierdo -->
+                <a href="#panelIzquierdo" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-nodisc-icon">Open left panel</a>
 
-		</footer>
-	</section>
-</body>
+            </div>
+
+            <!-- DIV de contenido de la página -->
+            <div data-role="content">
+
+                <div   data-role="content" align="center" >
+                    <h4>Prestamos</h4>
+                    <table id="tablaPrestamos">
+                             <thead>
+                                   <tr>
+                                         <th >Contacto</th>
+                                         <th>Modalidad</th>
+                                <th>Cantidad</th>
+                                   </tr>
+                             </thead>
+                             <tbody >
+                                   
+                        </tbody>
+                           </table>
+
+                    <script type="text/javascript">
+                        var seleccionado;
+
+                        document.addEventListener("deviceready", init, false);
+                        function init() {
+                            obtenerSesion();
+                            obtenerPrestamosTabla();
+                            navigator.contacts.find(
+                                    [navigator.contacts.fieldType.displayName],
+                                    gotContacts,
+                                    errorHandler);
+
+                        }
+                        function errorHandler(e) {
+                            console.log("errorHandler: " + e);
+                        }
+
+                        function clicked(item) {
+
+                        }
+
+                        function obtenerPrestamosTabla() {
+                            var tablaIngreso = document.getElementById('tablaPrestamos');
+
+                            db.transaction(function(tx) {
+
+                                tx.executeSql('SELECT * FROM prestamo where usuario=?', [sesion], function(tx, res) {
+                                    for (var i = 0; i < res.rows.length; i++) {
+                                        //arr.push(res.rows.item(i).cantidad);
+                                        tablaIngreso.innerHTML += "<tr>" + "<td>" + res.rows.item(i).contacto + "</td>" + "<td>" + res.rows.item(i).modalidad + "</td>" + "<td>" + res.rows.item(i).cantidad + "</td>" + "</tr>";
+                                    }
+
+                                }, function(err) {
+                                    alert("An error occured while saving the note");
+                                });
+                            });
+                        }
+
+                        function gotContacts(c) {
+                            console.log("gotContacts, number of results " + c.length);
+
+                            mobileDiv = document.querySelector("#mobile");
+                            emailDiv = document.querySelector("#email");
+
+                            /* Retriving phoneNumbers */
+                            for (var i = 0, len = c.length; i < len; i++) {
+                                if (c[i].phoneNumbers && c[i].phoneNumbers.length > 0) {
+
+                                    mobileDiv.innerHTML += "<div id='" + c[i].displayName + "'  onclick='seleccionarContacto(this)'>" + c[i].displayName + "<br/>" + c[i].phoneNumbers[0].value + "</div><br/>";
+
+                                }
+                            }
+
+                            /* Retriving Email */
+
+                        }
+
+                        function seleccionarContacto(item) {
+                            seleccionado = $(item).attr("id");
+                            ;
+                            document.getElementById("seleccionado").innerHTML = seleccionado;
+                        }
+
+                        function registrarPrestamo() {
+                            obtenerSesion();
+
+                            var cantidad = document.getElementById("cantidad").value;
+
+                            var e = document.getElementById("modalidad");
+                            var modo = e.options[e.selectedIndex].text;
+                            if (cantidad == "") {
+                                alert("No dejes espacios vacíos");
+                            } else {
+                                var fecha = new Date();
+                                //var cadenafecha=fecha.getDate()+"/"+fecha.getMonth()+1;
+                                var cadenafecha = "prueba";
+                                db.transaction(function(tx) {
+                                    tx.executeSql("INSERT INTO prestamo (usuario, contacto,modalidad ,cantidad) VALUES (?,?,?,?)", [sesion, seleccionado, modo, cantidad], function(tx, res) {
+                                        alert("Prestamo agregado");
+                                    });
+                                }, function(err) {
+                                    alert("Ocurrio un error");
+                                });
+
+
+                            }
+                        }
+
+
+                    </script>
+
+                </div>
+                <div data-role="panel" id="panelIzquierdo"  data-display="overlay">
+                    <h2> Menú </h2>
+                    <a href="#" data-rel="close" class="ui-btn ui-corner-all ui-shadow ui-mini ui-btn-inline ui-icon-delete ui-btn-icon-left ui-btn-right">Cerrar</a>
+                    <ul data-role="listview" data-inset="false">
+                        <li>
+                            <a id="a1" class="ui-btn" href="registrarIngreso.html" >Registrar ingreso</a>
+                        </li>
+                        <li>
+                            <a class="ui-btn" href="registrarEgreso.html" rel="external" >Registrar egreso</a>
+                        </li>
+                        <li>
+                            <a class="ui-btn" href="recordatorio.html" rel="external" >Agregar recordatorio</a>
+                        </li>
+                        <li>
+                            <a class="ui-btn" href="balance.html" rel="external"  >Balance</a>
+                        </li>
+                        <li>
+                            <a  class="ui-btn" href="contactos.html" rel="external">Agregar préstamo</a>
+                        </li>
+                        <li>
+                            <a id="a6" class="ui-btn" href="listaPrestamo.html" >Lista préstamos</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <!-- FOOTER de la pagina -->
+                <footer data-role="footer" data-position="fixed" >
+
+                    <p style="font-size:72%;text-align:center">
+                        © Elías Canché, Carlos Araujo Inc.  All rights reserved.
+                    </p>
+
+                </footer>
+        </section>
+    </body>
 </html>
