@@ -233,6 +233,7 @@ function registrarIngreso() {
 	db.transaction(function(tx) {
 		tx.executeSql("INSERT INTO ingreso (usuario, cantidad, descripcion) VALUES (?,?,?)", [sesion, cantidad, descripcion], function(tx, res) {
 			alert("ingreso agregado");
+                        window.location="balance.html";
 		});
 	}, function(err) {
 		alert("Ocurrio un error");
@@ -252,8 +253,10 @@ function registrarIngreso() {
 					if (cantidadNueva < 0) {
 						navigator.vibrate(500);
 						alert("Tu balance es negativo!! Ahora tienes " + cantidadNueva);
+                                                window.location="balance.html";
 					} else {
 						alert("Ahora tienes " + cantidadNueva);
+                                                window.location="balance.html";
 					}
 				});
 			}, function(err) {
@@ -283,6 +286,7 @@ function registrarEgreso() {
 	db.transaction(function(tx) {
 		tx.executeSql("INSERT INTO egreso (usuario, cantidad, descripcion) VALUES (?,?,?)", [sesion, cantidad, descripcion], function(tx, res) {
 			//alert("ingreso agregado");
+                        
 		});
 	}, function(err) {
 		alert("Ocurrio un error");
@@ -302,8 +306,10 @@ function registrarEgreso() {
 					if (cantidadNueva < 0) {
 						navigator.vibrate(500);
 						alert("Tu balance es negativo!! Ahora tienes " + cantidadNueva);
+                                                window.location="balance.html";
 					} else {
 						alert("Ahora tienes " + cantidadNueva);
+                                                window.location="balance.html";
 					}
 				});
 			}, function(err) {
