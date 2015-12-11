@@ -232,8 +232,8 @@ function registrarIngreso() {
 	var cadenafecha = "prueba";
 	db.transaction(function(tx) {
 		tx.executeSql("INSERT INTO ingreso (usuario, cantidad, descripcion) VALUES (?,?,?)", [sesion, cantidad, descripcion], function(tx, res) {
-			alert("ingreso agregado");
-                        window.location="balance.html";
+			//alert("ingreso agregado");
+                        //window.location="balance.html";
 		});
 	}, function(err) {
 		alert("Ocurrio un error");
@@ -253,10 +253,10 @@ function registrarIngreso() {
 					if (cantidadNueva < 0) {
 						navigator.vibrate(500);
 						alert("Tu balance es negativo!! Ahora tienes " + cantidadNueva);
-                                                window.location="balance.html";
+                                               // window.location="balance.html";
 					} else {
 						alert("Ahora tienes " + cantidadNueva);
-                                                window.location="balance.html";
+                                                //window.location="balance.html";
 					}
 				});
 			}, function(err) {
@@ -296,7 +296,7 @@ function registrarEgreso() {
 
 		tx.executeSql('SELECT * FROM balance where usuario=?', [sesion], function(tx, results) {
 			//for (var i=0; i < ; i++) {
-			alert(results.rows.item(results.rows.length - 1).cantidad);
+			//alert(results.rows.item(results.rows.length - 1).cantidad);
 			var anterior = results.rows.item(results.rows.length - 1).cantidad;
 
 			cantidadNueva = parseInt(anterior) - parseInt(cantidad);
@@ -306,10 +306,10 @@ function registrarEgreso() {
 					if (cantidadNueva < 0) {
 						navigator.vibrate(500);
 						alert("Tu balance es negativo!! Ahora tienes " + cantidadNueva);
-                                                window.location="balance.html";
+                                               // window.location="balance.html";
 					} else {
 						alert("Ahora tienes " + cantidadNueva);
-                                                window.location="balance.html";
+                                               // window.location="balance.html";
 					}
 				});
 			}, function(err) {
