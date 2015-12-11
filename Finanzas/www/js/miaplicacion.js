@@ -10,6 +10,7 @@ document.addEventListener("deviceready", function() {
 		//tx.executeSql('DROP TABLE IF EXISTS balance');
 		//
 		tx.executeSql("CREATE TABLE IF NOT EXISTS balance (usuario text , cantidad )");
+		tx.executeSql("CREATE TABLE IF NOT EXISTS prestamo (usuario text , contacto ,cantidad )");
 		tx.executeSql("CREATE TABLE IF NOT EXISTS ingreso (usuario text , cantidad , descripcion text )");
 		tx.executeSql("CREATE TABLE IF NOT EXISTS egreso (usuario text , cantidad , descripcion text )");
 		tx.executeSql("CREATE TABLE IF NOT EXISTS recordatorio (usuario, fecha, descripcion )");
@@ -145,10 +146,14 @@ function add() {
 	var fecha = new Date();
 	//var cadenafecha=fecha.getDate()+"/"+fecha.getMonth()+1;
 	var cadenafecha = "cadena de prueba";
+	if (nombre==""||usuario==""||contrasena==""||balance==""){
+		alert("No dejes espacios vacíos");
+	}else{
+
 
 	db.transaction(function(tx) {
 		tx.executeSql("INSERT INTO usuario (nombre, usuario, contrasena) VALUES (?,?,?)", [nombre, usuario, contrasena], function(tx, res) {
-			alert("Usuario agregado");
+			//alert("Usuario agregado");
 		});
 	}, function(err) {
 		alert("Ocurrio un error");
@@ -156,12 +161,12 @@ function add() {
 
 	db.transaction(function(tx) {
 		tx.executeSql("INSERT INTO balance (usuario, cantidad) VALUES (?,?)", [usuario, balance], function(tx, res) {
-			alert("Balance agregado");
+			alert("Bienvenido. Ahora tienes: "+balance);
 		});
 	}, function(err) {
 		alert("Ocurrio un error");
 	});
-
+}
 }
 
 function obtenerIngresosTabla() {
@@ -218,6 +223,10 @@ function registrarIngreso() {
 	var cantidadNueva = null;
 	var descripcion = document.getElementById("descripcion").value;
 	var cantidad = document.getElementById("cantidad").value;
+	
+	if (cantidad==""||descripcion==""){
+		alert("No dejes espacios vacíos");
+	}else{
 	var fecha = new Date();
 	//var cadenafecha=fecha.getDate()+"/"+fecha.getMonth()+1;
 	var cadenafecha = "prueba";
@@ -254,7 +263,7 @@ function registrarIngreso() {
 			//cantidadAnterior=results.rows.item(0).cantidad;
 		}, errorCB);
 	});
-
+}
 }
 
 function registrarEgreso() {
@@ -263,6 +272,11 @@ function registrarEgreso() {
 	var cantidadNueva = null;
 	var descripcion = document.getElementById("descripcion").value;
 	var cantidad = document.getElementById("cantidad").value;
+	
+	
+	if (cantidad==""||descripcion==""){
+		alert("No dejes espacios vacíos");
+	}else{
 	var fecha = new Date();
 	//var cadenafecha=fecha.getDate()+"/"+fecha.getMonth()+1;
 	var cadenafecha = "prueba";
@@ -299,7 +313,7 @@ function registrarEgreso() {
 			//cantidadAnterior=results.rows.item(0).cantidad;
 		}, errorCB);
 	});
-
+}
 }
 
 function cargarBalance() {

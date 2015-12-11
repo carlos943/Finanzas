@@ -27,7 +27,7 @@ function geolocationSuccess(position) {
 	var longitud = position.coords.longitude;
 
 	var element = document.getElementById('geolocation');
-	element.innerHTML = 'Tu localizacion es: <br /> Latitude: ' + latitud + '<br />' + 'Longitude: ' + longitud + '<br />' + '<hr />';
+	element.innerHTML = 'Tu localizacion es: <br /> Latitud: ' + latitud + '<br />' + 'Longitud: ' + longitud + '<br />' + '<hr />';
 
 
 	// var map = new GMaps({

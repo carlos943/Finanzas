@@ -3,7 +3,8 @@ function tomarfoto() {
     var cuadroFoto = $("#fotoTomada");
     if (switchFoto.val() == "si") {
         cuadroFoto.css({
-            "display": "block"
+            "display": "block",
+            "text-align":"center"
         });
     } else {
         cuadroFoto.css({

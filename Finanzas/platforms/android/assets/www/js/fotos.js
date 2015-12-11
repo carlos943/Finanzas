@@ -14,7 +14,7 @@ var pictureSource;
 
 				var smallImage = document.getElementById('imagen');
 
-				smallImage.style.display = 'block';
+				//smallImage.style.display = 'block';
 
 				smallImage.src = "data:image/jpeg;base64," + imageData;
 
@@ -26,7 +26,7 @@ var pictureSource;
 
 				var largeImage = document.getElementById('imagen');
 
-				largeImage.style.display = 'block';
+				//largeImage.style.display = 'block';
 
 				largeImage.src = imageURI;
 			}
