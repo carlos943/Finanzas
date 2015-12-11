@@ -64,26 +64,30 @@
 
 		<!-- DIV de contenido de la página -->
 		<div data-role="content">
-			<ul id="contactList"></ul>
-			<!-- MENU IZQUIERDO-->
-			Seleccionado=<div id="seleccionado"></div>
-			<input type="number" id="cantidad" />
-			<select id="modalidad">
-  <option value="1">Le debo</option>
-  <option value="2" >Me debe</option>
-  
-</select>
-			<button onclick="registrarPrestamo()">Agregar prestamo</button>
-			<h2>Contacts List</h2>
- <div id="mobile"></div>
- <div id="email"></div>
+			
+			<div   data-role="content" align="center" >
+			<h4>Prestamos</h4>
+            <table id="tablaPrestamos">
+                     <thead>
+                           <tr>
+                                 <th >Contacto</th>
+                                 <th>Modalidad</th>
+                        		<th>Modalidad</th>
+                           </tr>
+                     </thead>
+                     <tbody >
+                           
+                    </tbody>
+                   </table>
 
  <script type="text/javascript">
  var seleccionado;
  
  document.addEventListener("deviceready", init, false);
 function init() {
- navigator.contacts.find(
+	obtenerSesion();
+	obtenerPrestamosTabla();
+	 navigator.contacts.find(
  [navigator.contacts.fieldType.displayName],
  gotContacts,
  errorHandler);
@@ -96,6 +100,23 @@ function errorHandler(e) {
 function clicked(item) {
     
    }
+   
+   function obtenerPrestamosTabla() {
+	var tablaIngreso = document.getElementById('tablaPrestamos');
+
+	db.transaction(function(tx) {
+
+		tx.executeSql('SELECT * FROM prestamo where usuario=?', [sesion], function(tx, res) {
+			for (var i = 0; i < res.rows.length; i++) {
+				//arr.push(res.rows.item(i).cantidad);
+				tablaIngreso.innerHTML += "<tr>" + "<td>" + res.rows.item(i).contacto + "</td>" + "<td>" + res.rows.item(i).modalidad + "</td>" +  "<td>" + res.rows.item(i).cantidad + "</td>" +"</tr>";
+			}
+
+		}, function(err) {
+			alert("An error occured while saving the note");
+		});
+	});
+}
 
 function gotContacts(c) {
  console.log("gotContacts, number of results "+c.length);

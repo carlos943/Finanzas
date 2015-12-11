@@ -8,9 +8,9 @@ document.addEventListener("deviceready", function() {
 		tx.executeSql("CREATE TABLE IF NOT EXISTS usuario (nombre text primary key, usuario text,contrasena text)");
 		//QUITAR ESTA LINEA
 		//tx.executeSql('DROP TABLE IF EXISTS balance');
-		//
+		//tx.executeSql('DROP TABLE IF EXISTS prestamo');
 		tx.executeSql("CREATE TABLE IF NOT EXISTS balance (usuario text , cantidad )");
-		tx.executeSql("CREATE TABLE IF NOT EXISTS prestamo (usuario text , contacto ,cantidad )");
+		tx.executeSql("CREATE TABLE IF NOT EXISTS prestamo (usuario text , contacto, modalidad ,cantidad )");
 		tx.executeSql("CREATE TABLE IF NOT EXISTS ingreso (usuario text , cantidad , descripcion text )");
 		tx.executeSql("CREATE TABLE IF NOT EXISTS egreso (usuario text , cantidad , descripcion text )");
 		tx.executeSql("CREATE TABLE IF NOT EXISTS recordatorio (usuario, fecha, descripcion )");

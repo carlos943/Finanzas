@@ -68,6 +68,11 @@
 			<!-- MENU IZQUIERDO-->
 			Seleccionado=<div id="seleccionado"></div>
 			<input type="number" id="cantidad" />
+			<select id="modalidad">
+  <option value="1">Le debo</option>
+  <option value="2" >Me debe</option>
+  
+</select>
 			<button onclick="registrarPrestamo()">Agregar prestamo</button>
 			<h2>Contacts List</h2>
  <div id="mobile"></div>
@@ -121,6 +126,8 @@ function registrarPrestamo() {
 
 	var cantidad = document.getElementById("cantidad").value;
 	
+	var e = document.getElementById("modalidad");
+var modo = e.options[e.selectedIndex].text;
 	if (cantidad==""){
 		alert("No dejes espacios vacíos");
 	}else{
@@ -128,7 +135,7 @@ function registrarPrestamo() {
 	//var cadenafecha=fecha.getDate()+"/"+fecha.getMonth()+1;
 	var cadenafecha = "prueba";
 	db.transaction(function(tx) {
-		tx.executeSql("INSERT INTO prestamo (usuario, contacto, cantidad) VALUES (?,?,?)", [sesion, contacto, cantidad], function(tx, res) {
+		tx.executeSql("INSERT INTO prestamo (usuario, contacto,modalidad ,cantidad) VALUES (?,?,?,?)", [sesion, seleccionado,modo, cantidad], function(tx, res) {
 			alert("Prestamo agregado");
 		});
 	}, function(err) {
